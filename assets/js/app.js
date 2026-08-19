@@ -6,23 +6,49 @@
     return url && !url.includes("PASTE_YOUR_");
   }
 
-  function openReportApp() {
-    if (!isConfigured(appUrl)) {
+  function buildAppUrl(route) {
+    if (!isConfigured(appUrl)) return "";
+
+    try {
+      const url = new URL(appUrl);
+
+      if (route === "login") {
+        url.searchParams.set("auth", "login");
+      }
+
+      return url.toString();
+    } catch (_) {
+      if (route === "login") {
+        return appUrl + (appUrl.includes("?") ? "&" : "?") + "auth=login";
+      }
+      return appUrl;
+    }
+  }
+
+  function openReportApp(route) {
+    const targetUrl = buildAppUrl(route);
+
+    if (!targetUrl) {
       alert(
         "ยังไม่ได้ตั้งค่า Google Apps Script URL\n\n" +
         "เปิด assets/js/config.js แล้ววาง URL ที่ลงท้ายด้วย /exec ใน appUrl"
       );
       return;
     }
-    window.location.href = appUrl;
+
+    window.location.href = targetUrl;
   }
 
   document.querySelectorAll("[data-open-app]").forEach((button) => {
-    button.addEventListener("click", openReportApp);
+    button.addEventListener("click", function () {
+      const route = this.getAttribute("data-open-app") || "";
+      openReportApp(route);
+    });
   });
 
   const fb = String(config.facebookPageUrl || "").trim();
   const fbBox = document.getElementById("facebookNewsBox");
+
   if (fbBox) {
     if (fb) {
       fbBox.innerHTML = `
@@ -56,6 +82,7 @@
 
   const menu = document.getElementById("mobileMenu");
   const toggle = document.getElementById("menuToggle");
+
   if (menu && toggle) {
     toggle.addEventListener("click", () => {
       menu.classList.toggle("open");
