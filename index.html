@@ -4,83 +4,319 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>หน้าไว้อาลัย | นักสร้างสุขดอนแก้ว</title>
-
+  <title>หน้าไว้อาลัย | สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</title>
   <meta
     name="description"
-    content="หน้าไว้อาลัยของนักสร้างสุขดอนแก้ว"
+    content="หน้าไว้อาลัยในนามสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข"
   >
 
   <style>
+    :root {
+      --gold: #c9a568;
+      --gold-soft: #e8d9bd;
+      --black: #050505;
+      --panel: rgba(8, 8, 8, 0.92);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     html,
     body {
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       margin: 0;
-      padding: 0;
-      overflow: hidden;
       background: #000;
+      color: #fff;
+      font-family:
+        "Tahoma",
+        "Noto Sans Thai",
+        "Prompt",
+        sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
-    .memorial-link {
+    .memorial-page {
       position: fixed;
       inset: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.055), transparent 36%),
+        #000;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
+    .memorial-stage {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 18px;
+    }
 
-      width: 100%;
-      height: 100%;
-
+    .memorial-frame {
+      position: relative;
+      width: min(1180px, 100%);
+      height: min(760px, calc(100vh - 36px));
+      overflow: hidden;
+      border: 1px solid rgba(201,165,104,.42);
+      border-radius: 6px;
       background: #000;
-
-      cursor: pointer;
-      text-decoration: none;
-
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        0 24px 80px rgba(0,0,0,.55);
     }
 
     .memorial-image {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-
       object-fit: contain;
       object-position: center;
-
-      display: block;
-
+      filter: grayscale(100%) contrast(1.03) brightness(.9);
       pointer-events: none;
-      user-select: none;
-      -webkit-user-drag: none;
     }
 
-    .memorial-link:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: -6px;
+    /* แถบด้านบนของสมาคม */
+    .association-head {
+      position: absolute;
+      z-index: 4;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 14px;
+      width: fit-content;
+      max-width: calc(100% - 36px);
+      border: 1px solid rgba(232,217,189,.20);
+      background: rgba(0,0,0,.60);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .association-head img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.25);
+      flex: 0 0 auto;
+    }
+
+    .association-title {
+      line-height: 1.35;
+    }
+
+    .association-title strong {
+      display: block;
+      color: #fff;
+      font-size: clamp(15px, 2vw, 20px);
+      font-weight: 700;
+    }
+
+    .association-title span {
+      color: var(--gold-soft);
+      font-size: clamp(11px, 1.3vw, 14px);
+    }
+
+    /* ปิดข้อความหน่วยงานเดิมด้านล่าง แล้วแทนด้วยชื่อสมาคม */
+    .association-footer {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 22px 24px;
+      text-align: center;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,.78) 26%,
+          rgba(0,0,0,.96) 55%,
+          #000 100%
+        );
+    }
+
+    .association-footer-inner {
+      width: min(880px, 100%);
+      border-top: 1px solid rgba(201,165,104,.48);
+      padding-top: 20px;
+    }
+
+    .tribute-label {
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: clamp(12px, 1.4vw, 15px);
+      letter-spacing: .02em;
+    }
+
+    .tribute-main {
+      color: #fff;
+      font-size: clamp(16px, 2vw, 24px);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .tribute-sub {
+      margin-top: 7px;
+      color: rgba(255,255,255,.72);
+      font-size: clamp(11px, 1.3vw, 14px);
+      line-height: 1.65;
+    }
+
+    .official-site {
+      margin-top: 8px;
+      color: rgba(232,217,189,.78);
+      font-size: 11px;
+    }
+
+    .tap-hint {
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.56);
+      color: rgba(255,255,255,.52);
+      font-size: 10px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .memorial-stage {
+        padding: 0;
+      }
+
+      .memorial-frame {
+        width: 100%;
+        height: 100vh;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .association-head {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+      }
+
+      .association-head img {
+        width: 46px;
+        height: 46px;
+      }
+
+      .association-footer {
+        min-height: 138px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <a
-    class="memorial-link"
-    href="https://script.google.com/macros/s/AKfycbxYZNy_pJzM8Q6rQ0GzU53ELH5nUyrDfExcqyzxqi7NE1iMZdPn446kKjvKVOy5Ce9IkQ/exec"
-    aria-label="เข้าสู่เว็บไซต์ระบบรายงานนักสร้างสุข."
+  <main
+    class="memorial-page"
+    id="memorialPage"
+    role="link"
+    tabindex="0"
+    aria-label="เข้าสู่เว็บไซต์ระบบรายงานนักสร้างสุข"
   >
-    <img
-      class="memorial-image"
-      src="assets/img/memorial.png"
-      alt="หน้าไว้อาลัย"
-      draggable="false"
-    >
-  </a>
+    <div class="memorial-stage">
+      <div class="memorial-frame">
+
+        <img
+          class="memorial-image"
+          src="assets/img/memorial.png"
+          alt="หน้าไว้อาลัย"
+          draggable="false"
+        >
+
+        <div class="association-head">
+          <img
+            src="assets/img/logo-donkaew.png"
+            alt="ตราสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข"
+          >
+
+          <div class="association-title">
+            <strong>สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</strong>
+            <span>Donkaew Wellbeing Community Association</span>
+          </div>
+        </div>
+
+        <div class="association-footer">
+          <div class="association-footer-inner">
+            <div class="tribute-label">
+              ในนามสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข
+            </div>
+
+            <div class="tribute-main">
+              ด้วยสำนึกในพระมหากรุณาธิคุณเป็นล้นพ้น
+            </div>
+
+            <div class="tribute-sub">
+              ข้าพระพุทธเจ้า คณะกรรมการ สมาชิก และเจ้าหน้าที่<br>
+              สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข
+            </div>
+
+            <div class="official-site">
+              uda2020.com
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tap-hint">
+      คลิกหรือแตะที่หน้าจอเพื่อเข้าสู่ระบบ
+    </div>
+  </main>
+
+  <script>
+    // ใส่ Google Apps Script Web App URL ที่ใช้งานได้จริงตรงนี้
+    const APP_URL = "PASTE_WORKING_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE";
+
+    function goToApp() {
+      if (!APP_URL || APP_URL.includes("PASTE_WORKING_")) {
+        alert(
+          "กรุณาใส่ Google Apps Script Web App URL ที่ใช้งานได้จริงในตัวแปร APP_URL ก่อน"
+        );
+        return;
+      }
+
+      window.location.href = APP_URL;
+    }
+
+    document
+      .getElementById("memorialPage")
+      .addEventListener("click", goToApp);
+
+    document
+      .getElementById("memorialPage")
+      .addEventListener("keydown", function(event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          goToApp();
+        }
+      });
+  </script>
 
 </body>
 </html>
