@@ -6,5 +6,5 @@ window.SANGSOOK_CONFIG = {
   // ระบบจะสร้างปุ่มไปยังเพจให้โดยอัตโนมัติ
   facebookPageUrl: "",
 
-  siteUrl: "https://www.sangsook-donkaew.org/"
+  siteUrl: "https://sangsook2026.github.io/sangsook-donkaew/"
 };
