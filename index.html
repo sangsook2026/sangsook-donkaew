@@ -1,322 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>หน้าไว้อาลัย | สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</title>
-  <meta
-    name="description"
-    content="หน้าไว้อาลัยในนามสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข"
-  >
+  <title>นักสร้างสุขดอนแก้ว | โครงการพัฒนาศักยภาพนักสร้างสุขเสริมสร้างสุขภาวะชุมชน</title>
+  <meta name="description" content="เว็บไซต์ประชาสัมพันธ์โครงการพัฒนาศักยภาพนักสร้างสุขเสริมสร้างสุขภาวะชุมชน สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข อำเภอแม่ริม จังหวัดเชียงใหม่ พร้อมระบบส่งและติดตามรายงานกิจกรรมออนไลน์">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://sangsook2026.github.io/sangsook-donkaew/">
 
-  <style>
-    :root {
-      --gold: #c9a568;
-      --gold-soft: #e8d9bd;
-      --black: #050505;
-      --panel: rgba(8, 8, 8, 0.92);
-    }
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:site_name" content="นักสร้างสุขดอนแก้ว">
+  <meta property="og:title" content="นักสร้างสุขดอนแก้ว | สุขภาวะชุมชน">
+  <meta property="og:description" content="ข่าวประชาสัมพันธ์ ข้อมูลโครงการ และระบบส่งรายงานกิจกรรมนักสร้างสุข">
+  <meta property="og:url" content="https://sangsook2026.github.io/sangsook-donkaew/">
+  <meta property="og:image" content="https://sangsook2026.github.io/sangsook-donkaew/assets/img/logo-donkaew.png">
 
-    * {
-      box-sizing: border-box;
-    }
+  <meta name="twitter:card" content="summary_large_image">
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family:
-        "Tahoma",
-        "Noto Sans Thai",
-        "Prompt",
-        sans-serif;
-    }
+  <link rel="icon" href="assets/img/logo-donkaew.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    body {
-      overflow: hidden;
-    }
-
-    .memorial-page {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.055), transparent 36%),
-        #000;
-      cursor: pointer;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .memorial-stage {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-    }
-
-    .memorial-frame {
-      position: relative;
-      width: min(1180px, 100%);
-      height: min(760px, calc(100vh - 36px));
-      overflow: hidden;
-      border: 1px solid rgba(201,165,104,.42);
-      border-radius: 6px;
-      background: #000;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.04),
-        0 24px 80px rgba(0,0,0,.55);
-    }
-
-    .memorial-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      filter: grayscale(100%) contrast(1.03) brightness(.9);
-      pointer-events: none;
-    }
-
-    /* แถบด้านบนของสมาคม */
-    .association-head {
-      position: absolute;
-      z-index: 4;
-      top: 18px;
-      left: 18px;
-      right: 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 10px 14px;
-      width: fit-content;
-      max-width: calc(100% - 36px);
-      border: 1px solid rgba(232,217,189,.20);
-      background: rgba(0,0,0,.60);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .association-head img {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-      filter: grayscale(100%) brightness(1.25);
-      flex: 0 0 auto;
-    }
-
-    .association-title {
-      line-height: 1.35;
-    }
-
-    .association-title strong {
-      display: block;
-      color: #fff;
-      font-size: clamp(15px, 2vw, 20px);
-      font-weight: 700;
-    }
-
-    .association-title span {
-      color: var(--gold-soft);
-      font-size: clamp(11px, 1.3vw, 14px);
-    }
-
-    /* ปิดข้อความหน่วยงานเดิมด้านล่าง แล้วแทนด้วยชื่อสมาคม */
-    .association-footer {
-      position: absolute;
-      z-index: 5;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      min-height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 22px 24px;
-      text-align: center;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0,0,0,0) 0%,
-          rgba(0,0,0,.78) 26%,
-          rgba(0,0,0,.96) 55%,
-          #000 100%
-        );
-    }
-
-    .association-footer-inner {
-      width: min(880px, 100%);
-      border-top: 1px solid rgba(201,165,104,.48);
-      padding-top: 20px;
-    }
-
-    .tribute-label {
-      margin-bottom: 8px;
-      color: var(--gold);
-      font-size: clamp(12px, 1.4vw, 15px);
-      letter-spacing: .02em;
-    }
-
-    .tribute-main {
-      color: #fff;
-      font-size: clamp(16px, 2vw, 24px);
-      font-weight: 700;
-      line-height: 1.55;
-    }
-
-    .tribute-sub {
-      margin-top: 7px;
-      color: rgba(255,255,255,.72);
-      font-size: clamp(11px, 1.3vw, 14px);
-      line-height: 1.65;
-    }
-
-    .official-site {
-      margin-top: 8px;
-      color: rgba(232,217,189,.78);
-      font-size: 11px;
-    }
-
-    .tap-hint {
-      position: fixed;
-      z-index: 10;
-      left: 50%;
-      bottom: 10px;
-      transform: translateX(-50%);
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.56);
-      color: rgba(255,255,255,.52);
-      font-size: 10px;
-      pointer-events: none;
-    }
-
-    @media (max-width: 700px) {
-      .memorial-stage {
-        padding: 0;
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://sangsook2026.github.io/sangsook-donkaew/#organization",
+        "name": "สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข",
+        "url": "https://sangsook2026.github.io/sangsook-donkaew/",
+        "logo": "https://sangsook2026.github.io/sangsook-donkaew/assets/img/logo-donkaew.png",
+        "email": "sangsook1268@gmail.com",
+        "telephone": "052076117",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "92 หมู่ 3 ตำบลดอนแก้ว",
+          "addressLocality": "อำเภอแม่ริม",
+          "addressRegion": "เชียงใหม่",
+          "postalCode": "50180",
+          "addressCountry": "TH"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://sangsook2026.github.io/sangsook-donkaew/#website",
+        "url": "https://sangsook2026.github.io/sangsook-donkaew/",
+        "name": "นักสร้างสุขดอนแก้ว",
+        "publisher": {"@id": "https://sangsook2026.github.io/sangsook-donkaew/#organization"},
+        "inLanguage": "th-TH"
       }
-
-      .memorial-frame {
-        width: 100%;
-        height: 100vh;
-        border: 0;
-        border-radius: 0;
-      }
-
-      .association-head {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-      }
-
-      .association-head img {
-        width: 46px;
-        height: 46px;
-      }
-
-      .association-footer {
-        min-height: 138px;
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
-
 <body>
 
-  <main
-    class="memorial-page"
-    id="memorialPage"
-    role="link"
-    tabindex="0"
-    aria-label="เข้าสู่เว็บไซต์ระบบรายงานนักสร้างสุข"
-  >
-    <div class="memorial-stage">
-      <div class="memorial-frame">
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="#home">
+      <img src="assets/img/logo-donkaew.png" alt="ตราสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข">
+      <span>
+        นักสร้างสุขดอนแก้ว
+        <small>สุขภาวะชุมชน • ดอนแก้ว • แม่ริม • เชียงใหม่</small>
+      </span>
+    </a>
 
-        <img
-          class="memorial-image"
-          src="assets/img/memorial.png"
-          alt="หน้าไว้อาลัย"
-          draggable="false"
-        >
+    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
-        <div class="association-head">
-          <img
-            src="assets/img/logo-donkaew.png"
-            alt="ตราสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข"
-          >
+    <nav class="nav" id="mobileMenu" aria-label="เมนูหลัก">
+      <a href="#home">หน้าหลัก</a>
+      <a href="#about">เกี่ยวกับโครงการ</a>
+      <a href="#news">ข่าวประชาสัมพันธ์</a>
+      <a href="#contact">ติดต่อเรา</a>
+      <button class="btn btn-primary" data-open-app="login">
+        <i class="fa-solid fa-right-to-bracket me-2"></i>เข้าสู่ระบบรายงาน
+      </button>
+    </nav>
+  </div>
+</header>
 
-          <div class="association-title">
-            <strong>สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</strong>
-            <span>Donkaew Wellbeing Community Association</span>
+<main>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-card">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-heart-pulse"></i> สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</span>
+          <h1>พัฒนาศักยภาพนักสร้างสุข<br>เสริมสร้างสุขภาวะชุมชน</h1>
+          <p>
+            พื้นที่ประชาสัมพันธ์ ข่าวสารกิจกรรม และระบบบริการออนไลน์สำหรับนักสร้างสุข
+            เพื่อบันทึก ติดตาม และขับเคลื่อนงานสุขภาวะชุมชนอย่างเป็นระบบ
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-light" data-open-app>
+              <i class="fa-solid fa-file-circle-plus me-2"></i>ส่งรายงานกิจกรรม
+            </button>
+            <button class="btn btn-outline" data-open-app>
+              <i class="fa-solid fa-clock-rotate-left me-2"></i>ดูประวัติรายงาน
+            </button>
           </div>
         </div>
 
-        <div class="association-footer">
-          <div class="association-footer-inner">
-            <div class="tribute-label">
-              ในนามสมาคมมหาวิชชาลัยดอนแก้วสร้างสุข
-            </div>
-
-            <div class="tribute-main">
-              ด้วยสำนึกในพระมหากรุณาธิคุณเป็นล้นพ้น
-            </div>
-
-            <div class="tribute-sub">
-              ข้าพระพุทธเจ้า คณะกรรมการ สมาชิก และเจ้าหน้าที่<br>
-              สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข
-            </div>
-
-            <div class="official-site">
-              uda2020.com
-            </div>
-          </div>
+        <div class="logo-panel" aria-label="องค์กรภาคี">
+          <img src="assets/img/logo-sss.png" alt="สำนักงานกองทุนสนับสนุนการสร้างเสริมสุขภาพ สสส.">
+          <img src="assets/img/logo-donkaew.png" alt="สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข">
+          <img src="assets/img/logo-rangsook.png" alt="ตราร่างสุข">
         </div>
-
       </div>
     </div>
+  </section>
 
-    <div class="tap-hint">
-      คลิกหรือแตะที่หน้าจอเพื่อเข้าสู่ระบบ
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-seedling"></i> เกี่ยวกับระบบ</span>
+          <h2>เว็บไซต์ประชาสัมพันธ์<br>เชื่อมต่อระบบรายงานเดิม</h2>
+        </div>
+        <p>
+          ผู้ใช้งานสามารถค้นหาเว็บไซต์จาก Google เพื่ออ่านข้อมูลโครงการและข่าวประชาสัมพันธ์
+          จากนั้นเข้าสู่ระบบ Google Apps Script เดิมเพื่อส่งและติดตามรายงาน
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="iconbox"><i class="fa-solid fa-bullhorn"></i></div>
+          <h3>ประชาสัมพันธ์เข้าถึงง่าย</h3>
+          <p>มีหน้าเว็บสาธารณะที่เหมาะสำหรับข่าวกิจกรรม ข้อมูลโครงการ และการค้นหาผ่าน Google</p>
+        </article>
+        <article class="feature">
+          <div class="iconbox"><i class="fa-solid fa-file-shield"></i></div>
+          <h3>ระบบเดิมยังทำงานครบ</h3>
+          <p>Login, Google Sheets, Google Drive, Word และประวัติรายงานยังทำงานใน Apps Script เดิม</p>
+        </article>
+        <article class="feature">
+          <div class="iconbox"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <h3>พร้อมสำหรับ SEO</h3>
+          <p>มี Title, Description, Structured Data, robots.txt และ sitemap.xml สำหรับ Search Engine</p>
+        </article>
+      </div>
     </div>
-  </main>
+  </section>
 
-  <script>
-    // ใส่ Google Apps Script Web App URL ที่ใช้งานได้จริงตรงนี้
-    const APP_URL = "https://script.google.com/macros/s/AKfycbxYZNy_pJzM8Q6rQ0GzU53ELH5nUyrDfExcqyzxqi7NE1iMZdPn446kKjvKVOy5Ce9IkQ/exec";
+  <section class="section">
+    <div class="container two-col">
+      <article class="editorial green">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-file-pen"></i> บริการออนไลน์</span>
+          <h3>ส่งรายงานกิจกรรมนักสร้างสุข</h3>
+          <p>เข้าสู่ระบบรายงานเดิมเพื่อกรอกกิจกรรม แนบรูป/เอกสาร และจัดเก็บข้อมูลเข้าสู่ Google Sheets และ Drive</p>
+        </div>
+        <button class="btn btn-light" data-open-app>เข้าสู่ระบบส่งรายงาน</button>
+      </article>
 
-    function goToApp() {
-      if (!APP_URL || APP_URL.includes("PASTE_WORKING_")) {
-        alert(
-          "https://script.google.com/macros/s/AKfycbxYZNy_pJzM8Q6rQ0GzU53ELH5nUyrDfExcqyzxqi7NE1iMZdPn446kKjvKVOy5Ce9IkQ/exec"
-        );
-        return;
-      }
+      <article class="editorial orange">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-clock-rotate-left"></i> ติดตามผล</span>
+          <h3>ดูประวัติและดาวน์โหลดรายงาน</h3>
+          <p>ตรวจสอบรายงานย้อนหลัง สถานะการตรวจ และดาวน์โหลดเอกสารผ่านระบบ Google Apps Script เดิม</p>
+        </div>
+        <button class="btn btn-light" data-open-app>เปิดระบบรายงาน</button>
+      </article>
+    </div>
+  </section>
 
-      window.location.href = APP_URL;
-    }
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-newspaper"></i> ข่าวสาร</span>
+          <h2>ข่าวประชาสัมพันธ์</h2>
+        </div>
+        <p>พื้นที่สำหรับเชื่อมข่าวจาก Facebook Page ของโครงการและประชาสัมพันธ์กิจกรรมล่าสุด</p>
+      </div>
+      <div id="facebookNewsBox"></div>
+    </div>
+  </section>
 
-    document
-      .getElementById("memorialPage")
-      .addEventListener("click", goToApp);
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <span class="eyebrow"><i class="fa-solid fa-headset"></i> ติดต่อโครงการ</span>
+        <h2>สมาคมมหาวิชชาลัยดอนแก้วสร้างสุข</h2>
 
-    document
-      .getElementById("memorialPage")
-      .addEventListener("keydown", function(event) {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          goToApp();
-        }
-      });
-  </script>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <small>โทรศัพท์</small>
+            <a href="tel:052076117"><strong>052 076 117</strong></a>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <small>อีเมล</small>
+            <a href="mailto:sangsook1268@gmail.com"><strong>sangsook1268@gmail.com</strong></a>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <small>ที่อยู่</small>
+            <strong>92 หมู่ 3 ต.ดอนแก้ว อ.แม่ริม จ.เชียงใหม่ 50180</strong>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-clock"></i>
+            <small>เวลาทำการ</small>
+            <strong>จันทร์–ศุกร์ 08:30–17:00 น.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
+<footer class="footer">
+  <div class="container footer-row">
+    <span>© <span id="year"></span> นักสร้างสุขดอนแก้ว</span>
+    <span>เว็บไซต์ประชาสัมพันธ์และระบบรายงานกิจกรรมสุขภาวะชุมชน</span>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
